@@ -20,7 +20,9 @@ namespace TransponderReceiverApplication
 
             // Let the real TDR execute in the background
             while (true)
+            {
                 Thread.Sleep(1000);
+            }
         }
     }
 }

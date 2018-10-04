@@ -14,14 +14,9 @@ namespace TransponderReceiverUser
     {
         public List<Track> isInList { get; set; }
 
-        public Warnings()
-        {
-            isInList = new List<Track>();
-        }
-
         public bool checkY(Track plane)
         {
-            if (10000 < plane.YCoordinate && plane.YCoordinate > 90000)
+            if (10000 < plane.YCoordinate && plane.YCoordinate < 150000)
             {
                 return true;
             }
@@ -33,7 +28,7 @@ namespace TransponderReceiverUser
 
         public bool checkZ(Track plane)
         {
-            if (500 < plane.Altitude && plane.Altitude > 20000)
+            if (500 < plane.Altitude && plane.Altitude < 20000)
             {
                 return true;
             }
@@ -45,7 +40,7 @@ namespace TransponderReceiverUser
 
         public bool checkX(Track plane)
         {
-            if (10000 < plane.XCoordinate && plane.XCoordinate > 90000)
+            if (10000 < plane.XCoordinate && plane.XCoordinate < 150000)
             {
                 return true;
             }
@@ -59,7 +54,14 @@ namespace TransponderReceiverUser
         {
             if (checkX(plane) && checkY(plane) && checkZ(plane) )
             {
-                isInList.Add(plane);
+                if(PlanesInOurList(plane))
+                { 
+                    //do nothing
+                }
+                else
+                {
+                    isInList.Add(plane);
+                }
             }
         }
 
@@ -94,24 +96,23 @@ namespace TransponderReceiverUser
         {
                 lock (isInList)
                 {
-                    foreach (var item in isInList.ToList())
-                        if (planes.Tag != item.Tag)
-                        {
-                            //foreach (var item in isInList.ToList().Where(item => item.Tag != data.Tag))
+                         foreach (var item in isInList.ToList().Where(item => item.Tag != planes.Tag))
                             {
                                 if (Math.Abs((planes.XCoordinate - item.XCoordinate)) < 100000 &&
                                     Math.Abs((planes.YCoordinate - item.YCoordinate)) < 100000 &&
                                     Math.Abs((planes.Altitude - item.Altitude)) < 200000)
                                 {
-                                    isInList.Add(item);
                                     Console.WriteLine("WARNING!! {0} and {1} are TOO DAMN CLOSE!!", planes.Tag, item.Tag);
+                                    return true;
+                                }
+                                else
+                                {
+                                    return false;
                                 }
                             }
-                        }
-                }
-            
 
-            return isInList.Count >= 1;
+                    return false;
+                }
         }
     }
   

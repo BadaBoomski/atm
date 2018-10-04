@@ -20,6 +20,9 @@ namespace TransponderReceiverApplication
             // Dependency injection with the real TDR
             var system = new TransponderReceiverUser.TransponderReceiverClient(receiver);
 
+            //create a program wide version of warnings
+            Warnings warnings = new Warnings();
+
             // Let the real TDR execute in the background
             while (true)
             {

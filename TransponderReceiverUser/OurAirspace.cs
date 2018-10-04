@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TransponderReceiverUser
 {
-    class OurAirspace : IOurAirspace
+    public class OurAirspace : IOurAirspace, IWarnings
     {
         public int SouthWestCornerX { get; set; }
         public int SoutWestCornerY { get; set; }
@@ -14,6 +15,8 @@ namespace TransponderReceiverUser
         public int NorthEastCornerY { get; set; }
         public int LowerAltitude { get; set; }
         public int UpperAltitude { get; set; }
+
+        public List<Track> isInList { get; set;}
 
         public OurAirspace()
         {
@@ -32,8 +35,13 @@ namespace TransponderReceiverUser
                 track.YCoordinate >= SoutWestCornerY && track.YCoordinate <= NorthEastCornerY &&
                 track.Altitude >= LowerAltitude && track.Altitude <= UpperAltitude)
             {
+                Console.WriteLine("Added plane to list.."); // Just for debugging..
+                isInList.Add(track);
                 return true;
             }
+
+            Console.WriteLine("Removed plane from list.."); // Just for debugging..
+            isInList.Remove(track);
             return false;
         }
 

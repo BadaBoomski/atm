@@ -25,13 +25,14 @@ namespace TransponderReceiverUser
             foreach (var data in e.TransponderData)
             {
                 //System.Console.WriteLine($"Transponderdata {data}");
-                //Track track = new Track();
-                //var convertToTrackData = track.ConvertToTrackData(data);
-                //Warnings warnings = new Warnings();
-                //warnings.isInList = new List<Track>() {convertToTrackData};
-                //warnings.PlanesInOurList(track);
-                //warnings.PlanesAreTooDamnClose(convertToTrackData);
-              
+                Track track = new Track();
+                var convertToTrackData = track.ConvertToTrackData(data);
+                Warnings warnings = new Warnings();
+                warnings.isInList = new List<Track>() {convertToTrackData};
+                warnings.PlanesInOurList(track);
+                warnings.PlanesAreTooDamnClose(convertToTrackData);
+                Console.WriteLine(warnings.PlanesAreTooDamnClose(track));
+                
                 //warnings.isInList.ForEach(Console.WriteLine);
                 
                 //handleData.Track testTrack = new handleData.Track();

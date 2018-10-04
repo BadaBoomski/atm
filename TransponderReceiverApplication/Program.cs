@@ -13,7 +13,6 @@ namespace TransponderReceiverApplication
     {
         static void Main(string[] args)
         {
-            var _warn = new Warnings();
 
             // Using the real transponder data receiver
             var receiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
@@ -26,6 +25,7 @@ namespace TransponderReceiverApplication
             {
                 Thread.Sleep(1000);
             }
+
         }
     }
 }

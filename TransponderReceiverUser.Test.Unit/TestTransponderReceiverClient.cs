@@ -8,6 +8,7 @@ namespace TransponderReceiverUser.Test.Unit
     public class TestTransponderReceiverClient
     {
         private ITransponderReceiver _fakeTransponderReceiver;
+        private ITransponderReceiver _fakeTransponderReceiverTeeeest;
         private TransponderReceiverClient _uut;
         [SetUp]
         public void Setup()

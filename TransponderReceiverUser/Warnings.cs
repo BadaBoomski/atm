@@ -82,7 +82,6 @@ namespace TransponderReceiverUser
                         break;
                     }
                 }
-
                 return existsInList;
             }
         }

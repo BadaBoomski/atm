@@ -1,15 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
+using TransponderReceiver;
 
 namespace TransponderReceiverUser
 {
     public class Warnings : IWarnings
     {
-        public List<Track>isInList { get; set; }
-        private bool PlanesInOurList(Track planes)
+        public List<Track> isInList { get; set; }
+
+        public Warnings()
+        {
+        }
+
+        // sort planes only in airspace.
+        public bool PlanesInOurList(Track planes)
         {
             var existsInList = false;
             lock (isInList)
@@ -31,7 +39,7 @@ namespace TransponderReceiverUser
             }
         }
 
-        private bool PlanesAreTooDamnClose(Track data)
+        public bool PlanesAreTooDamnClose(Track data)
         {
             lock (isInList)
             {
@@ -39,16 +47,18 @@ namespace TransponderReceiverUser
                 {
                     if (data.Tag != item.Tag)
                     {
-                        if (Math.Abs((data.XCoordinate - item.XCoordinate)) < 5000 &&
-                            Math.Abs((data.YCoordinate - item.YCoordinate)) < 5000 &&
-                            Math.Abs((data.Altitude - item.Altitude)) < 300)
+                        if (Math.Abs((data.XCoordinate - item.XCoordinate)) < 100000 &&
+                            Math.Abs((data.YCoordinate - item.YCoordinate)) < 100000 &&
+                            Math.Abs((data.Altitude - item.Altitude)) < 200000)
                         {
                             Console.WriteLine("WARNING!! {0} and {1} are TOO DAMN CLOSE!!", data.Tag, item.Tag);
                         }
                     }
+                    else Console.WriteLine("TEEEEEEEEEEEEEEEEEST");
                 }
             }
 
+            return true;
         }
     }
 }

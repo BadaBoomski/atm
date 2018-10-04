@@ -18,6 +18,7 @@ namespace TransponderReceiverUser
         public double Velocity { get; set; }
         public double CompassCourse { get; set; }
 
+        // Converting the given data from the .dll into useful data.
         public Track ConvertToTrackData(string rawData)
         {
             Track tempTrack = new Track();

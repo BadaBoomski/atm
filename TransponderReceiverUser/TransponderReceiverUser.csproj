@@ -44,7 +44,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HandleData.cs" />
     <Compile Include="IOurAirspace.cs" />
     <Compile Include="IWarnings.cs" />
     <Compile Include="OurAirspace.cs" />

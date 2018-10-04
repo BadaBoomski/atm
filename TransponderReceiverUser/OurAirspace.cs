@@ -25,6 +25,7 @@ namespace TransponderReceiverUser
             UpperAltitude = 20000;
         }
 
+        // The class will check wether the planes are inside the airspace or not
         public bool isAirplaneInOurAirspace(Track track)
         {
             if (track.XCoordinate >= SouthWestCornerX && track.XCoordinate <= NorthEastCornerX &&
@@ -36,7 +37,8 @@ namespace TransponderReceiverUser
             return false;
         }
 
-        public void cleanUp(Track track) // remove tracks from output. Secondary.
+        // Trying to create a method, that removes/cleans the output (secondary!)
+        public void cleanUp(Track track)
         {
         }
     }

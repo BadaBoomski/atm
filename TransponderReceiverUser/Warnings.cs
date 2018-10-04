@@ -45,7 +45,7 @@ namespace TransponderReceiverUser
             {
                 foreach (var item in isInList.ToList())
                 {
-                    if (data.Tag != item.Tag)
+                    if (data.Tag == item.Tag) // denn var if (data.Tag != item.Tag), men burde være ==
                     {
                         if (Math.Abs((data.XCoordinate - item.XCoordinate)) < 100000 &&
                             Math.Abs((data.YCoordinate - item.YCoordinate)) < 100000 &&

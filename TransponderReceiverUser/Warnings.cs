@@ -43,18 +43,14 @@ namespace TransponderReceiverUser
         {
             lock (isInList)
             {
-                foreach (var item in isInList.ToList())
+                foreach (var item in isInList.ToList().Where(item => item.Tag != data.Tag))
                 {
-                    if (data.Tag == item.Tag) // denn var if (data.Tag != item.Tag), men burde være ==
-                    {
                         if (Math.Abs((data.XCoordinate - item.XCoordinate)) < 100000 &&
                             Math.Abs((data.YCoordinate - item.YCoordinate)) < 100000 &&
                             Math.Abs((data.Altitude - item.Altitude)) < 200000)
                         {
                             Console.WriteLine("WARNING!! {0} and {1} are TOO DAMN CLOSE!!", data.Tag, item.Tag);
                         }
-                    }
-                    else Console.WriteLine("TEEEEEEEEEEEEEEEEEST");
                 }
             }
 

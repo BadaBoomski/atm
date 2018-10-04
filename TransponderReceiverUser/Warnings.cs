@@ -13,7 +13,6 @@ namespace TransponderReceiverUser
     public class Warnings : IWarnings
     {
         public List<Track> isInList { get; set; }
-        public List<Track> isInConflict;
 
         public Warnings()
         {
@@ -66,6 +65,8 @@ namespace TransponderReceiverUser
 
         public void removePlaneIfOutOfAirspace(Track plane)
         {
+            if (checkX(plane) && checkY(plane) && checkZ(plane))
+                isInList.Remove(plane);
 
         }
 
@@ -91,31 +92,26 @@ namespace TransponderReceiverUser
 
         public bool PlanesAreTooDamnClose(Track planes)
         {
-            lock (isInConflict)
-            {
-                isInConflict.Clear();
-
                 lock (isInList)
                 {
-                    foreach (var item in isInList.ToList())
-                        if (planes.Tag != item.Tag)
-                        {
-                            //foreach (var item in isInList.ToList().Where(item => item.Tag != data.Tag))
+                    //foreach (var item in isInList.ToList())
+                    //    if (planes.Tag != item.Tag)
+                    //    {
+                            foreach (var item in isInList.ToList().Where(item => item.Tag != data.Tag))
                             {
                                 if (Math.Abs((planes.XCoordinate - item.XCoordinate)) < 100000 &&
                                     Math.Abs((planes.YCoordinate - item.YCoordinate)) < 100000 &&
                                     Math.Abs((planes.Altitude - item.Altitude)) < 200000)
                                 {
-                                    isInConflict.Add(item);
-                                    Console.WriteLine("WARNING!! {0} and {1} are TOO DAMN CLOSE!!", planes.Tag,
-                                        item.Tag);
+                                    isInList.Add(item);
+                                    Console.WriteLine("WARNING!! {0} and {1} are TOO DAMN CLOSE!!", planes.Tag, item.Tag);
                                 }
                             }
                         }
                 }
-            }
+            
 
-            return isInConflict.Count >= 1;
+            return isInList.Count >= 1;
         }
     }
   

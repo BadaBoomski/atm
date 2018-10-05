@@ -61,12 +61,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestTrackAndWarnings.cs" />
     <Compile Include="TestTransponderReceiverClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TransponderReceiverApplication\TransponderReceiverApplication.csproj">
+      <Project>{5bf5a5a7-e181-4321-a362-d16f4849586a}</Project>
+      <Name>TransponderReceiverApplication</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TransponderReceiverUser\TransponderReceiverUser.csproj">
       <Project>{ad9e07f6-3d14-47c9-955e-ff20c7fe5433}</Project>
       <Name>TransponderReceiverUser</Name>

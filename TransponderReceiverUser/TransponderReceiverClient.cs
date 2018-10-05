@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Remoting.Services;
 using TransponderReceiver;
 
+
 namespace TransponderReceiverUser
 {
     public class TransponderReceiverClient
@@ -26,12 +27,11 @@ namespace TransponderReceiverUser
             {
                 //System.Console.WriteLine($"Transponderdata {data}");
                 Track track = new Track();
-                var convertToTrackData = track.ConvertToTrackData(data);
-                Warnings warnings = new Warnings();
-                warnings.isInList = new List<Track>() {convertToTrackData};
-                warnings.PlanesInOurList(track);
-                warnings.PlanesAreTooDamnClose(convertToTrackData);
-                Console.WriteLine(warnings.PlanesAreTooDamnClose(track));
+                var convertedTrackData = track.ConvertToTrackData(data);
+               .warnings.addPlane(plane)
+                Program.warnings.removePlaneIfOutOfAirspace(convertedTrackData);
+                Program.warnings.PlanesAreTooDamnClose(convertedTrackData);
+                Console.WriteLine(warnings.PlanesAreTooDamnClose(convertedTrackData));
                 
                 //warnings.isInList.ForEach(Console.WriteLine);
                 
